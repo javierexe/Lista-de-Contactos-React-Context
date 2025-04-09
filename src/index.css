@@ -1,0 +1,137 @@
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: lightgray;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin: 20px
+}
+
+.contact-card {
+
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+    max-width: 600 px;
+    gap: 10px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.contact-info {
+    padding-left: 10px;
+    flex-grow: 1;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.contact-actions button {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-info p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.contact-actions button:active {
+    background-color: #e0e0e0;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.contact-actions .edit-button {
+    color: darkblue;
+}
+
+.contact-actions .delete-button {
+    color: #dc3545;
+}
+
+.add-contact button {
+    padding: 0.5rem 1rem;
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.add-contact button:hover {
+    background-color:#007bff;
+ }
+
+.container .add-contact{
+    text-align: right;
+    
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: lightgrey;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-container input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-container button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1rem;
+}
+
