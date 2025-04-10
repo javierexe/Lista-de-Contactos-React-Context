@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useContacts } from "../context/ContactContext.jsx"
 
 const EditContact = () => {
     const {id} = useParams();
-    const {store, dispatch} = useGlobalReducer();
     const navigate = useNavigate();
+    const { contacts, updateContact } = useContacts();
 
     const [contact, setContact] = useState(null);
 
     useEffect(() => {
-        const exist = store.contacts.find((contact) => contact.id === parseInt(id));
+        const exist = contacts.find((contact) => contact.id === parseInt(id));
         if (exist)
             setContact(exist);
-    }, [id, store.contacts]);
+    }, [id, contacts]);
 
     const handleChange = (e) => {
         setContact({
@@ -22,12 +22,9 @@ const EditContact = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch({
-            type: "UPDATE_CONTACT",
-            payload: contact,
-        });
+        await updateContact(id, contact);
         navigate("/");
     };
 
@@ -40,7 +37,7 @@ const EditContact = () => {
             <div className="form-container">
                 <h2>Editar Contacto</h2>
                 <form onSubmit={handleSubmit}>
-                    <input name="full_name" value={contact.full_name} onChange={handleChange} required />
+                    <input name="name" value={contact.name} onChange={handleChange} required />
                     <input name="email" value={contact.email} onChange={handleChange} required />
                     <input name="phone" value={contact.phone} onChange={handleChange} required />
                     <input name="address" value={contact.address} onChange={handleChange} required />

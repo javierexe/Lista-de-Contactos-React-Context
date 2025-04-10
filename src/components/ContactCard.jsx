@@ -1,18 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 import { FiEdit } from "react-icons/fi";
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEmail, MdLocalPhone, MdLocationPin } from "react-icons/md";
 import { useState } from 'react';
+import { useContacts } from '../context/ContactContext';
 
 const ContactCard = ({ contact }) => {
     const navigate = useNavigate();
-    const { dispatch } = useGlobalReducer();
     const [showModal, setShowModal] = useState(false);
-    
-    const handleDelete = () => {
-            dispatch({ type: 'DELETE_CONTACT', payload: contact.id});
+
+    const { deleteContact } = useContacts();
+
+
+    const handleDelete = (id) => {
+            deleteContact(id);
             setShowModal(false);
             
         };
@@ -21,12 +23,12 @@ const ContactCard = ({ contact }) => {
         <>
             <div className="contact-card">
                 <img
-                    src={`https://ui-avatars.com/api/?name=${contact.full_name}&background=random&rounded=true`}
-                    alt={contact.full_name}
+                    src={`https://ui-avatars.com/api/?name=${contact.name}&background=random&rounded=true`}
+                    alt={contact.name}
                     className="avatar"
                 />
                 <div className="contact-info">
-                    <h3>{contact.full_name}</h3>
+                    <h3>{contact.name}</h3>
                     <p><MdEmail /> {contact.email}</p>
                     <p><MdLocalPhone /> {contact.phone}</p>
                     <p><MdLocationPin /> {contact.address}</p>
@@ -46,11 +48,11 @@ const ContactCard = ({ contact }) => {
                         <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
                         </div>
                         <div className="modal-body">
-                        <p>¿Estás seguro de que deseas eliminar a <strong>{contact.full_name}</strong>?</p>
+                        <p>¿Estás seguro de que deseas eliminar a <strong>{contact.name}</strong>?</p>
                         </div>
                         <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancelar</button>
-                        <button type="button" className="btn btn-danger" onClick={handleDelete}>Eliminar</button>
+                        <button type="button" className="btn btn-danger" onClick={() => handleDelete(contact.id)}>Eliminar</button>
                         </div>
                     </div>
                     </div>

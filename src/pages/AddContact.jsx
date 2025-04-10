@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useContacts } from "../context/ContactContext";
+
+
 
 const AddContact = () => {
-    const { dispatch } = useGlobalReducer();
+    const { addContact } = useContacts();
     const navigate = useNavigate();
 
     const [contact, setContact] = useState({
-        full_name: "",
+        name: "",
         email: "",
         phone: "",
         address: "",
@@ -21,15 +23,9 @@ const AddContact = () => {
     };
 
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({
-        type: "ADD_CONTACT",
-        payload: {
-            id: Date.now(),
-            ...contact,
-        },
-    });
+    await addContact(contact);
     navigate("/");
 };
 
@@ -38,7 +34,7 @@ return (
     <div className="form-container">
         <h2>Agregar Contacto</h2>
         <form onSubmit={handleSubmit}>
-                <input name="full_name" placeholder="Nombre" onChange={handleChange} required />
+                <input name="name" placeholder="Nombre" onChange={handleChange} required />
                 <input name="email" placeholder="Email" onChange={handleChange} required />
                 <input name="phone" placeholder="Teléfono" onChange={handleChange} required />
                 <input name="address" placeholder="Dirección" onChange={handleChange} required />

@@ -1,11 +1,11 @@
 import React from "react";
 import ContactCard from "../components/ContactCard.jsx";
 import { useNavigate } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useContacts } from "../context/ContactContext.jsx";
 
 export const Home = () => {
 
-  	const {store, dispatch} = useGlobalReducer();
+  	const { contacts, deleteContact } = useContacts();
 	const navigate = useNavigate();
 
 	return (
@@ -16,11 +16,12 @@ export const Home = () => {
                 ➕ Agregar contacto
             	</button>
 			</div>
-			{store.contacts.lehgth === 0 ? (
+
+			{contacts.length === 0 ? (
 				<p>No se encontraron contactos</p>
 			) : (
-				store.contacts.map((contact, index) => (
-					<ContactCard key={index} contact={contact} />
+				contacts.map((contact) => (
+					<ContactCard key={contact.id} contact={contact} />
 				))
 			)}
 		</div>
